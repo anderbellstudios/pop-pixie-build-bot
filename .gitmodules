@@ -1,0 +1,6 @@
+[submodule "packagers/pop-pixie-windows-installer"]
+	path = packagers/pop-pixie-windows-installer
+	url = https://github.com/anderbellstudios/pop-pixie-windows-installer.git
+[submodule "packagers/pop-pixie-macos-dmg"]
+	path = packagers/pop-pixie-macos-dmg
+	url = https://github.com/anderbellstudios/pop-pixie-macos-dmg.git

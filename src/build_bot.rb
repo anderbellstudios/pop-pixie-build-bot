@@ -1,5 +1,6 @@
 require_relative 'build_bot/builder'
 require_relative 'build_bot/build'
+require_relative 'build_bot/packager'
 
 class BuildBot
   attr_reader :options, :builder, :packager, :zipper, :uploader

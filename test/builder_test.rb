@@ -1,14 +1,14 @@
 require_relative 'test_helper'
 
-BuildDouble = Struct.new(:platform, :dir)
-
-class UnityServiceDouble
-  def build_for_platforms(platform_dirs)
-    platform_dirs.map { |platform, dir| BuildDouble.new(platform, dir) }
-  end
-end
-
 class BuilderTest < TestCase
+  BuildDouble = Struct.new(:platform, :dir)
+
+  class UnityServiceDouble
+    def build_for_platforms(platform_dirs)
+      platform_dirs.map { |platform, dir| BuildDouble.new(platform, dir) }
+    end
+  end
+
   setup do
     @builder = Builder.new(unity_service: UnityServiceDouble.new)
   end
