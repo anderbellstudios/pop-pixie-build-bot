@@ -1,6 +1,7 @@
 require_relative 'build_bot/builder'
 require_relative 'build_bot/build'
 require_relative 'build_bot/packager'
+require_relative 'build_bot/zipper'
 
 class BuildBot
   attr_reader :options, :builder, :packager, :zipper, :uploader
@@ -20,7 +21,7 @@ class BuildBot
       if package?
         builds.map { |build| packager.package(build) }
       else
-        builds.map { |build| zipper.zip(build) }
+        builds.map { |build| zipper.zip(build.dir, game_name: game_name) }
       end
 
     builds.each(&:clean_up)
