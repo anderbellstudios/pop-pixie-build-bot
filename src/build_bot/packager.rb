@@ -1,7 +1,8 @@
 require './packagers/pop-pixie-windows-installer/binding'
+require './packagers/pop-pixie-macos-dmg/binding'
 
 class Packager
-  def initialize(platform_packagers: { windows: WindowsPackager })
+  def initialize(platform_packagers: { windows: WindowsPackager, macos: MacOSPackager })
     @platform_packagers = platform_packagers
   end
 

@@ -4,7 +4,7 @@ class BuilderTest < TestCase
   BuildDouble = Struct.new(:platform, :dir)
 
   class UnityServiceDouble
-    def build_for_platforms(platform_dirs)
+    def build_for_platforms(platform_dirs, game_name:)
       platform_dirs.map { |platform, dir| BuildDouble.new(platform, dir) }
     end
   end
@@ -18,8 +18,8 @@ class BuilderTest < TestCase
   end
 
   test 'builds reflect given platforms' do
-    build([:mac, :linux])
-    assert_equal [:mac, :linux], @builds.map(&:platform)
+    build([:macos])
+    assert_equal [:macos], @builds.map(&:platform)
   end
 
   test 'creates a temporary directory for each platform' do
@@ -32,7 +32,7 @@ class BuilderTest < TestCase
 
   private
 
-  def build(platforms = [:windows, :mac, :linux])
-    @builds = @builder.build_for_platforms(platforms)
+  def build(platforms = [:windows, :macos])
+    @builds = @builder.build_for_platforms(platforms, game_name: 'My Game')
   end
 end

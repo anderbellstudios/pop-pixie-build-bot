@@ -19,7 +19,7 @@ class PackagerTest < TestCase
   end
 
   test 'raises an error if the platform packager does not exist' do
-    build = BuildDouble.new(platform: :linux)
+    build = BuildDouble.new(platform: :macos)
     assert_raises(RuntimeError) { @packager.package(build) }
   end
 end

@@ -3,9 +3,11 @@ GEM
   specs:
     fileutils (1.6.0)
     minitest (5.15.0)
+    open3 (0.1.1)
     optparse (0.2.0)
     rake (13.0.6)
     rubyzip (2.3.2)
+    slack-incoming-webhooks (0.3.0)
     tmpdir (0.1.2)
       fileutils
 
@@ -15,9 +17,11 @@ PLATFORMS
 
 DEPENDENCIES
   minitest (~> 5.15)
+  open3 (~> 0.1.1)
   optparse (~> 0.2.0)
   rake (~> 13.0)
   rubyzip (~> 2.3)
+  slack-incoming-webhooks (~> 0.3.0)
   tmpdir (~> 0.1.2)
 
 BUNDLED WITH
