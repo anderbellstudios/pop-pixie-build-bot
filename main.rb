@@ -1,5 +1,5 @@
 require 'optparse'
-require './src/build_bot'
+require_relative 'src/build_bot'
 
 options = {
   game_name: 'Pop Pixie',
