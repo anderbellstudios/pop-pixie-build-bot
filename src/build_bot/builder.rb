@@ -7,7 +7,7 @@ class Builder
 
   def build_for_platforms(platforms)
     platforms_dirs = platforms.map do |platform|
-      [platform, Dir.new(Dir.mktmpdir)]
+      [platform, Dir.mktmpdir]
     end.to_h
 
     @unity_service.build_for_platforms(platforms_dirs)
