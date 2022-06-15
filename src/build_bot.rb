@@ -37,7 +37,9 @@ class BuildBot
       notifier.notify(urls, game_name: game_name)
     end
 
-    builds.each(&:clean_up)
+    unless open_builds?
+      builds.each(&:clean_up)
+    end
   end
 
   private
