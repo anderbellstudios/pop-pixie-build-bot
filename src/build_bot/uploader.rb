@@ -1,21 +1,21 @@
+require 'aws-sdk-s3'
+
 class Uploader
   def upload(file, platform:)
-    relative_path = File.join(platform.to_s, File.basename(file))
-
-    system(
-      'scp',
-      file,
-      Environment.fetch(:SCP_HOST) + ':' + quote(
-        File.join(Environment.fetch(:SCP_TARGET_PREFIX), relative_path)
-      ),
+    client = Aws::S3::Client.new(
+      endpoint: Environment.fetch('S3_ENDPOINT'),
+      region: Environment.fetch('AWS_REGION'),
+      force_path_style: true,
+      access_key_id: Environment.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: Environment.fetch('AWS_SECRET_ACCESS_KEY'),
     )
 
-    return File.join(Environment.fetch(:WWW_URL_PREFIX), relative_path)
-  end
+    s3 = Aws::S3::Resource.new(client: client)
+    bucket = s3.bucket(Environment.fetch('S3_BUCKET'))
+    object = bucket.object(platform.to_s)
 
-  private
+    object.upload_file(file, content_disposition: "attachment; filename=#{File.basename(file)}")
 
-  def quote(string)
-    "\"#{string}\""
+    return object.public_url
   end
 end
