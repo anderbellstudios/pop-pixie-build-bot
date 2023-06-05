@@ -1,7 +1,7 @@
 require 'aws-sdk-s3'
 
 class Uploader
-  def upload(file, platform:)
+  def upload(file, key:)
     client = Aws::S3::Client.new(
       endpoint: Environment.fetch('S3_ENDPOINT'),
       region: Environment.fetch('AWS_REGION'),
@@ -12,7 +12,7 @@ class Uploader
 
     s3 = Aws::S3::Resource.new(client: client)
     bucket = s3.bucket(Environment.fetch('S3_BUCKET'))
-    object = bucket.object(platform.to_s)
+    object = bucket.object(key)
 
     object.upload_file(file, content_disposition: "attachment; filename=#{File.basename(file)}")
 

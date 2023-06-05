@@ -33,8 +33,13 @@ class BuildBot
     end.to_h
 
     if upload?
-      urls = platform_files.map { |platform, file| uploader.upload(file, platform: platform) }
-      notifier.notify(urls, game_name: game_name)
+      urls = platform_files.map do |platform, file|
+        uploader.upload(file, key: "#{key_prefix}#{platform.to_s}")
+      end
+
+      if notify?
+        notifier.notify(urls, game_name: game_name)
+      end
     end
 
     unless open_builds?
@@ -66,5 +71,13 @@ class BuildBot
 
   def upload?
     options[:upload]
+  end
+
+  def notify?
+    options[:notify]
+  end
+
+  def key_prefix
+    options[:key_prefix]
   end
 end
